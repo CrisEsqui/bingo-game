@@ -1,0 +1,34 @@
+.create-player-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .create-player-form div {
+    margin-bottom: 15px;
+  }
+  
+  .create-player-form label {
+    font-weight: bold;
+  }
+  
+  .create-player-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    margin-top: 5px;
+  }
+  
+  .create-player-form input[type="text"]:focus {
+    border-color: #007bff;
+  }
+
+  .error-message {
+    font-size: small;
+    font-weight: lighter;
+    color: red;
+  }
+  
