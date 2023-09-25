@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import CreatePlayerForm from '../CreatePlayerForm/CreatePlayerForm';
+import axios from 'axios';
 
 const CreatePlayerModal = ({ show, onHide, players }) => {
 
@@ -29,22 +30,28 @@ const CreatePlayerModal = ({ show, onHide, players }) => {
         setErrors(currentErrors);
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
 
         if (Object.keys(errors).length > 0) {
             return;
         }
 
 
-        console.log(formData);
+        try {
+            await axios.post('http://localhost:3001/player', formData);
 
-        // Set all the states to their default values
-        setFormData(defaultFormData);
-        setErrors(defaultErrors);
-        setSubmitDisabled(true);
 
-        // Hide the modal
-        onHide()
+            // Set all the states to their default values
+            setFormData(defaultFormData);
+            setErrors(defaultErrors);
+            setSubmitDisabled(true);
+
+            // Hide the modal
+            onHide()
+
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     useEffect(() => {
@@ -62,6 +69,7 @@ const CreatePlayerModal = ({ show, onHide, players }) => {
                     Crear nuevo jugador
                 </Modal.Title>
             </Modal.Header>
+
             <Modal.Body className='body-create-player-form'>
 
                 <CreatePlayerForm
@@ -70,7 +78,6 @@ const CreatePlayerModal = ({ show, onHide, players }) => {
                     errors={errors}
                     players={players}
                 />
-
 
             </Modal.Body>
             <Modal.Footer>
